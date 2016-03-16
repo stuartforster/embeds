@@ -379,3 +379,16 @@ test('parse() custom secure embed', t => {
   };
   t.same(actual, expected);
 });
+
+test('parse() custom secure embed with no protocol', t => {
+  const input = '<iframe src="//custom.com" width="600" height="600" frameborder="0"></iframe>';
+  const actual = parse(input);
+  const expected = {
+    type: 'custom',
+    src: '//custom.com',
+    width: 600,
+    height: 600,
+    secure: true
+  };
+  t.same(actual, expected);
+});
