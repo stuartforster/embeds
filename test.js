@@ -24,6 +24,19 @@ test('parse() img', t => {
   t.same(actual, expected);
 });
 
+test('parse() single element', t => {
+  const elm = queryDom('<img src="http://example.com/image.jpg" />')[0];
+  const actual = _parse(elm);
+  const expected = {
+    type: 'image',
+    src: 'http://example.com/image.jpg',
+    width: undefined,
+    height: undefined,
+    alt: undefined
+  };
+  t.same(actual, expected);
+});
+
 test('parse() img, with alt-attribute', t => {
   const actual = parse('<img src="http://example.com/image.jpg" alt="beep boop" />');
   const expected = {
