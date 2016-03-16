@@ -130,61 +130,6 @@ test('parse() video with width & height css', t => {
   t.same(actual, expected);
 });
 
-test('parse() figure + video with src', t => {
-  const input = '<figure><video src="http://example.com/video.mp4" /></figure>';
-  const actual = parse(input);
-  const expected = {
-    type: 'video',
-    sources: [{
-      src: 'http://example.com/video.mp4',
-      type: null
-    }],
-    width: undefined,
-    height: undefined
-  };
-  t.same(actual, expected);
-});
-
-test('parse() figure + video with sources', t => {
-  const input = tsml`<figure>
-    <video>
-      <source src="http://example.com/video.mp4" />
-      <source src="http://example.com/video2.mp4" type="video/mp4"/>
-    </video>
-  </figure>`;
-  const actual = parse(input);
-  const expected = {
-    type: 'video',
-    sources: [{
-      src: 'http://example.com/video.mp4',
-      type: null
-    }, {
-      src: 'http://example.com/video2.mp4',
-      type: 'video/mp4'
-    }],
-    width: undefined,
-    height: undefined
-  };
-  t.same(actual, expected);
-});
-
-test('parse() figure + video with src & figcaption', t => {
-  const input = `<figure>
-    <video src="http://example.com/video.mp4"></video>
-  </figure>`;
-  const actual = parse(input);
-  const expected = {
-    type: 'video',
-    sources: [{
-      src: 'http://example.com/video.mp4',
-      type: null
-    }],
-    width: undefined,
-    height: undefined
-  };
-  t.same(actual, expected);
-});
-
 test('parse() youtube iframe', t => {
   const input = `<iframe src="https://www.youtube.com/embed/pDVmldTurqk"></iframe>`;
   const actual = parse(input);
@@ -203,19 +148,6 @@ test('parse() youtube embedly iframe', t => {
   const expected = {
     type: 'youtube',
     youtubeId: '3rS6mZUo3fg'
-  };
-  t.same(actual, expected);
-});
-
-test('parse() figure + youtube iframe', t => {
-  const input = `<figure>
-    <iframe src="https://www.youtube.com/embed/pDVmldTurqk"></iframe>
-    <figcaption>Hello, <b>world</b></figcaption>
-  </figure>`;
-  const actual = parse(input);
-  const expected = {
-    type: 'youtube',
-    youtubeId: 'pDVmldTurqk'
   };
   t.same(actual, expected);
 });
