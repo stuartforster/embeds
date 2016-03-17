@@ -151,6 +151,27 @@ test('parse() video with sources', t => {
   t.same(actual, expected);
 });
 
+
+test('render() video  ', t => {
+  const actual = render({
+    type: 'video',
+    sources: [{
+      src: 'http://example.com/video.mp4',
+      type: null
+    }, {
+      src: 'http://example.com/video2.mp4',
+      type: 'video/mp4'
+    }],
+    width: 100,
+    height: 200
+  });
+  const expected = tsml`<video width="100" height="200">
+    <source src="http://example.com/video.mp4"></source>
+    <source src="http://example.com/video2.mp4" type="video/mp4"></source>
+  </video>`;
+  t.same(actual, expected);
+});
+
 test('parse() video with width & height', t => {
   const input = '<video src="http://example.com/video.mp4" width="100" height="200" />';
   const actual = parse(input);
