@@ -32,6 +32,7 @@
     "tsml": "^1.0.1"
   },
   "dependencies": {
+    "deku": "^2.0.0-rc16",
     "embedly-url": "^1.0.0",
     "get-youtube-id": "^1.0.0",
     "lodash.find": "^4.2.0",

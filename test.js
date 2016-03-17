@@ -1,10 +1,12 @@
 import test from 'ava';
 import 'babel-core/register';
-import {parse as _parse} from './lib';
+import {parse as _parse, render as _render} from './lib';
 import queryDom from 'query-dom';
 import tsml from 'tsml';
+import {string} from 'deku';
 
 const parse = str => _parse(queryDom(str));
+const render = opts => string.render(_render(opts));
 
 test('parse() empty', t => {
   const actual = parse('');
@@ -21,6 +23,18 @@ test('parse() img', t => {
     height: undefined,
     alt: undefined
   };
+  t.same(actual, expected);
+});
+
+test('render() img', t => {
+  const actual = render({
+    type: 'image',
+    src: 'http://example.com/image.jpg',
+    width: undefined,
+    height: undefined,
+    alt: undefined
+  });
+  const expected = '<img src="http://example.com/image.jpg"></img>';
   t.same(actual, expected);
 });
 
@@ -49,6 +63,18 @@ test('parse() img, with alt-attribute', t => {
   t.same(actual, expected);
 });
 
+test('render() img, with alt-attribute', t => {
+  const actual = render({
+    type: 'image',
+    src: 'http://example.com/image.jpg',
+    width: undefined,
+    height: undefined,
+    alt: 'beep boop'
+  });
+  const expected = '<img src="http://example.com/image.jpg" alt="beep boop"></img>';
+  t.same(actual, expected);
+});
+
 test('parse() img with width & height', t => {
   const input = tsml`<img src="http://example.com/image.jpg" width="100" height="200" />`;
   const actual = parse(input);
@@ -60,6 +86,18 @@ test('parse() img with width & height', t => {
     alt: undefined
   };
 
+  t.same(actual, expected);
+});
+
+test('render() img with width & height', t => {
+  const actual = render({
+    type: 'image',
+    src: 'http://example.com/image.jpg',
+    width: 100,
+    height: 200,
+    alt: undefined
+  });
+  const expected = '<img src="http://example.com/image.jpg" width="100" height="200"></img>';
   t.same(actual, expected);
 });
 
