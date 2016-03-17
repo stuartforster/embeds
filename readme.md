@@ -1,6 +1,6 @@
 # embeds
 
-A javascript module to parse (and soon) render embeds.
+A javascript module to parse and render embeds - such as images, video, youtube, facebook etc.
 
 Can be used in the browser (through browserify) and node.js.
 
