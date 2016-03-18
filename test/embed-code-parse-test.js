@@ -273,3 +273,29 @@ test('imgur', t => {
   t.same(parseInput('http://imgur.com/2GuAESk/embed'), expected);
   t.same(parseInput('//imgur.com/2GuAESk/embed'), expected);
 });
+
+test('vimeo', t => {
+  const vimeoCode = tsml`
+    <iframe src="https://player.vimeo.com/video/35630244?color=ff002f"
+      width="500"
+      height="281"
+      frameborder="0"
+      webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    <p><a href="https://vimeo.com/35630244">Red Aurora Australis</a> from <a href="
+      https://vimeo.com/terrastro">Alex Cherney</a> on <a href="
+      https://vimeo.com">Vimeo</a>.</p>`;
+
+  const expected = {
+    type: 'vimeo',
+    url: 'https://player.vimeo.com/video/35630244',
+    id: '35630244'
+  };
+
+  t.same(parseInput(vimeoCode), expected);
+  t.same(parseInput('https://player.vimeo.com/video/35630244'), expected);
+  t.same(parseInput('http://player.vimeo.com/video/35630244'), expected);
+  t.same(parseInput('//player.vimeo.com/video/35630244'), expected);
+  t.same(parseInput('https://vimeo.com/35630244'), expected);
+  t.same(parseInput('http://vimeo.com/35630244'), expected);
+  t.same(parseInput('//vimeo.com/35630244'), expected);
+});
