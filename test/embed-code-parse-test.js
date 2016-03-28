@@ -299,3 +299,21 @@ test('vimeo', t => {
   t.same(parseInput('http://vimeo.com/35630244'), expected);
   t.same(parseInput('//vimeo.com/35630244'), expected);
 });
+
+test('graphiq', t => {
+  const expected = {
+    type: 'graphiq',
+    url: 'https://w.graphiq.com/w/2iub6zz6ltH',
+    id: '2iub6zz6ltH'
+  };
+
+  t.same(parseInput('https://graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.same(parseInput('http://graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.same(parseInput('//graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.same(parseInput('https://www.graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.same(parseInput('http://www.graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.same(parseInput('//www.graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.same(parseInput('https://w.graphiq.com/w/2iub6zz6ltH'), expected);
+  t.same(parseInput('http://w.graphiq.com/w/2iub6zz6ltH'), expected);
+  t.same(parseInput('//w.graphiq.com/w/2iub6zz6ltH'), expected);
+});
