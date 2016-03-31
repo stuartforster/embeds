@@ -26,4 +26,12 @@ const embedCode = '<iframe src="https://www.youtube.com/embed/pDVmldTurqk"></ifr
 const parsed = parse(queryDom(embedCode));
 ```
 
-For more examples, please see the [tests](https://github.com/micnews/embeds/blob/master/test.js).
+You can also parse input, such as a url.
+
+```js
+import {parseInput} from 'embeds';
+
+const parsed = parseInput('https://www.youtube.com/embed/pDVmldTurqk');
+```
+
+For more examples, please see the [tests](https://github.com/micnews/embeds/tree/master/test).
