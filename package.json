@@ -1,11 +1,14 @@
 {
   "name": "embeds",
-  "version": "1.0.0",
+  "version": "1.2.1",
   "description": "Parse & render embeds",
   "main": "dist/index.js",
   "scripts": {
+    "lint": "semistandard | snazzy",
     "test": "nyc ava && semistandard | snazzy",
-    "prepublish": "mkdir -p dist && babel lib --out-dir dist"
+    "build": "babel lib --out-dir dist",
+    "watch": "babel lib --out-dir dist --watch",
+    "prepublish": "mkdir -p dist && npm run build"
   },
   "repository": {
     "type": "git",
@@ -33,6 +36,7 @@
     "tsml": "^1.0.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.7.2",
     "deku": "^2.0.0-rc16",
     "embedly-url": "^1.0.0",
     "get-youtube-id": "^1.0.0",
