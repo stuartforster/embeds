@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import test from 'ava';
 import 'babel-core/register';
 import { parseInput } from '../lib';
