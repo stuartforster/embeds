@@ -321,8 +321,30 @@ test('parse() facebook - post', t => {
   t.same(actual, expected);
 });
 
+test('parse() facebook - post with embed code', t => {
+  const input = `${fixtures.facebookEmbedCode}${fixtures.facebookPost}`;
+  const actual = parse(input);
+  const expected = {
+    url: 'https://www.facebook.com/david.bjorklund/posts/10153809692501070',
+    type: 'facebook',
+    embedAs: 'post'
+  };
+  t.same(actual, expected);
+});
+
 test('parse() facebook - video', t => {
   const input = fixtures.facebookVideo;
+  const actual = parse(input);
+  const expected = {
+    url: 'https://www.facebook.com/MicMedia/videos/1060315987324524/',
+    type: 'facebook',
+    embedAs: 'video'
+  };
+  t.same(actual, expected);
+});
+
+test('parse() facebook - video with embed code', t => {
+  const input = `${fixtures.facebookEmbedCode}${fixtures.facebookVideo}`;
   const actual = parse(input);
   const expected = {
     url: 'https://www.facebook.com/MicMedia/videos/1060315987324524/',
