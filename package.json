@@ -38,7 +38,6 @@
     "tsml": "^1.0.1"
   },
   "dependencies": {
-    "babel-polyfill": "^6.7.2",
     "deku": "^2.0.0-rc16",
     "embedly-url": "^1.0.0",
     "get-youtube-id": "^1.0.0",
