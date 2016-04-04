@@ -316,7 +316,13 @@ test('parse() facebook - post', t => {
   const expected = {
     url: 'https://www.facebook.com/david.bjorklund/posts/10153809692501070',
     type: 'facebook',
-    embedAs: 'post'
+    embedAs: 'post',
+    date: 'Thursday, January 21, 2016',
+    user: 'David Pop Hipsterson',
+    text: [{
+      content: 'Hey!So, for the last few weeks I\'ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)',
+      href: null
+    }]
   };
   t.same(actual, expected);
 });
@@ -327,7 +333,13 @@ test('parse() facebook - post with embed code', t => {
   const expected = {
     url: 'https://www.facebook.com/david.bjorklund/posts/10153809692501070',
     type: 'facebook',
-    embedAs: 'post'
+    embedAs: 'post',
+    date: 'Thursday, January 21, 2016',
+    user: 'David Pop Hipsterson',
+    text: [{
+      content: 'Hey!So, for the last few weeks I\'ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)',
+      href: null
+    }]
   };
   t.same(actual, expected);
 });
@@ -338,7 +350,19 @@ test('parse() facebook - video', t => {
   const expected = {
     url: 'https://www.facebook.com/MicMedia/videos/1060315987324524/',
     type: 'facebook',
-    embedAs: 'video'
+    embedAs: 'video',
+    headline: 'Why is breastfeeding in public such a big deal?',
+    date: 'Friday, January 15, 2016',
+    user: {
+      url: 'https://www.facebook.com/MicMedia/',
+      name: 'Mic'
+    },
+    text: [
+      {
+        content: 'Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they\'re breastfeeding?',
+        href: null
+      }
+    ]
   };
   t.same(actual, expected);
 });
@@ -349,7 +373,19 @@ test('parse() facebook - video with embed code', t => {
   const expected = {
     url: 'https://www.facebook.com/MicMedia/videos/1060315987324524/',
     type: 'facebook',
-    embedAs: 'video'
+    embedAs: 'video',
+    headline: 'Why is breastfeeding in public such a big deal?',
+    date: 'Friday, January 15, 2016',
+    user: {
+      url: 'https://www.facebook.com/MicMedia/',
+      name: 'Mic'
+    },
+    text: [
+      {
+        content: 'Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they\'re breastfeeding?',
+        href: null
+      }
+    ]
   };
   t.same(actual, expected);
 });

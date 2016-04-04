@@ -20,7 +20,6 @@ test('parse() + render() facebook - video', t => {
   const expected = input;
   const actual = parseAndRender(input);
   t.is(actual, expected);
-
 });
 
 test('parse() + render() instagram - with caption', t => {
@@ -28,7 +27,6 @@ test('parse() + render() instagram - with caption', t => {
   const expected = input;
   const actual = parseAndRender(input);
   t.is(actual, expected);
-
 });
 
 test('parse() + render() instagram - without caption', t => {
@@ -36,5 +34,4 @@ test('parse() + render() instagram - without caption', t => {
   const expected = input;
   const actual = parseAndRender(input);
   t.is(actual, expected);
-
 });

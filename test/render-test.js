@@ -141,7 +141,10 @@ test('render() facebook - post', t => {
     embedAs: 'post',
     user: 'David Pop Hipsterson',
     date: 'Thursday, January 21, 2016',
-    text: 'Hey!So, for the last few weeks I\'ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)'
+    text: [{
+      content: 'Hey!So, for the last few weeks I\'ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)',
+      href: null
+    }]
   };
   const actual = render(input);
   const expected = fixtures.facebookPost;
@@ -157,7 +160,10 @@ test('render() facebook - video', t => {
       name: 'Mic',
       url: 'https://www.facebook.com/MicMedia/'
     },
-    text: 'Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they&#039;re breastfeeding?',
+    text: [{
+      content: 'Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they\'re breastfeeding?',
+      href: null
+    }],
     headline: 'Why is breastfeeding in public such a big deal?',
     date: 'Friday, January 15, 2016'
   };
