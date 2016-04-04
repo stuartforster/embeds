@@ -172,7 +172,7 @@ test('render() facebook - video', t => {
   t.same(actual, expected);
 });
 
-test('render custom', t => {
+test('render() custom', t => {
   const input = {
     type: 'custom',
     src: 'http://custom.com',
@@ -182,5 +182,16 @@ test('render custom', t => {
   };
   const actual = render(input);
   const expected = '<iframe src="http://custom.com" width="600" height="600" frameborder="0"></iframe>';
+  t.same(actual, expected);
+});
+
+test('render() vine', t => {
+  const input = {
+    id: 'bjHh0zHdgZT',
+    type: 'vine',
+    url: 'https://vine.co/v/bjHh0zHdgZT/embed/simple'
+  };
+  const actual = render(input);
+  const expected = '<iframe src="https://vine.co/v/bjHh0zHdgZT/embed/simple" width="600" height="600" frameborder="0"></iframe>';
   t.same(actual, expected);
 });
