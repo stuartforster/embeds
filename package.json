@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "semistandard | snazzy",
-    "test": "nyc ava && semistandard | snazzy",
+    "test": "nyc ava --verbose && semistandard | snazzy",
     "build": "babel lib --out-dir dist",
     "watch": "babel lib --out-dir dist --watch",
     "prepublish": "mkdir -p dist && npm run build"
