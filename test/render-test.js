@@ -133,3 +133,35 @@ test('render() instagram - without caption', t => {
   const expected = fixtures.instagramWithoutCaption;
   t.same(actual, expected);
 });
+
+test('render() facebook - post', t => {
+  const input = {
+    url: 'https://www.facebook.com/david.bjorklund/posts/10153809692501070',
+    type: 'facebook',
+    embedAs: 'post',
+    user: 'David Pop Hipsterson',
+    date: 'Thursday, January 21, 2016',
+    text: 'Hey!So, for the last few weeks I\'ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)'
+  };
+  const actual = render(input);
+  const expected = fixtures.facebookPost;
+  t.same(actual, expected);
+});
+
+test('render() facebook - video', t => {
+  const input = {
+    url: 'https://www.facebook.com/MicMedia/videos/1060315987324524/',
+    type: 'facebook',
+    embedAs: 'video',
+    user: {
+      name: 'Mic',
+      url: 'https://www.facebook.com/MicMedia/'
+    },
+    text: 'Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they&#039;re breastfeeding?',
+    headline: 'Why is breastfeeding in public such a big deal?',
+    date: 'Friday, January 15, 2016'
+  };
+  const actual = render(input);
+  const expected = fixtures.facebookVideo;
+  t.same(actual, expected);
+});
