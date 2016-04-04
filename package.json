@@ -7,9 +7,9 @@
     "lint": "semistandard | snazzy",
     "test:unit": "nyc ava --verbose",
     "test": "npm run test:unit && npm run lint",
-    "build": "babel lib --out-dir dist",
-    "watch": "babel lib --out-dir dist --watch",
-    "prepublish": "mkdir -p dist && npm run build",
+    "build": "rm -rf dist && mkdir -p dist && babel lib --out-dir dist",
+    "watch": "rm -rf dist && mkdir -p dist && babel lib --out-dir dist --watch",
+    "prepublish": "npm run build",
     "open-coverage": "npm run test:unit && nyc report --reporter=lcov && open coverage/lcov-report/index.html"
   },
   "repository": {
