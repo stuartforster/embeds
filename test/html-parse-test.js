@@ -311,17 +311,7 @@ test('parse() instagram - bad input', t => {
 });
 
 test('parse() facebook - post', t => {
-  const input = tsml`
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];  if (d.getElementById(id)) return;  js = d.createElement(s); js.id = id;  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";  fjs.parentNode.insertBefore(js, fjs);}(document, \'script\', \'facebook-jssdk\'));</script>
-    <div class="fb-post" data-href="https://www.facebook.com/david.bjorklund/posts/10153809692501070" data-width="500">
-      <div class="fb-xfbml-parse-ignore">
-        <blockquote cite="https://www.facebook.com/david.bjorklund/posts/10153809692501070">
-          <p>Hey!So, for the last few weeks I&#039;ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)</p>
-          Posted by <a href="#" role="button">David Pop Hipsterson</a> on&nbsp;<a href="https://www.facebook.com/david.bjorklund/posts/10153809692501070">Thursday, January 21, 2016</a>
-        </blockquote>
-      </div>
-    </div>`;
+  const input = fixtures.facebookPost;
   const actual = parse(input);
   const expected = {
     url: 'https://www.facebook.com/david.bjorklund/posts/10153809692501070',
@@ -332,7 +322,7 @@ test('parse() facebook - post', t => {
 });
 
 test('parse() facebook - video', t => {
-  const input = '<div id="fb-root"></div><script>(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];  if (d.getElementById(id)) return;  js = d.createElement(s); js.id = id;  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";  fjs.parentNode.insertBefore(js, fjs);}(document, \'script\', \'facebook-jssdk\'));</script><div class="fb-video" data-allowfullscreen="1" data-href="https://www.facebook.com/MicMedia/videos/1060315987324524/"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/MicMedia/videos/1060315987324524/"><a href="https://www.facebook.com/MicMedia/videos/1060315987324524/">Why is breastfeeding in public such a big deal?</a><p>Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they&#039;re breastfeeding?</p>Posted by <a href="https://www.facebook.com/MicMedia/">Mic</a> on Friday, January 15, 2016</blockquote></div></div>';
+  const input = fixtures.facebookVideo;
   const actual = parse(input);
   const expected = {
     url: 'https://www.facebook.com/MicMedia/videos/1060315987324524/',
