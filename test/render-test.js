@@ -171,3 +171,16 @@ test('render() facebook - video', t => {
   const expected = fixtures.facebookVideo;
   t.same(actual, expected);
 });
+
+test('render custom', t => {
+  const input = {
+    type: 'custom',
+    src: 'http://custom.com',
+    width: 600,
+    height: 600,
+    secure: false
+  };
+  const actual = render(input);
+  const expected = '<iframe src="http://custom.com" width="600" height="600" frameborder="0"></iframe>';
+  t.same(actual, expected);
+});
