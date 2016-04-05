@@ -76,8 +76,8 @@ test('render() tweet - normal', t => {
   const input = {
     type: 'twitter',
     text: [
-      { content: 'GIF vs. JIF… This ', href: null },
-      { content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6' }
+      {content: 'GIF vs. JIF… This ', href: null},
+      {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
     ],
     url: 'https://twitter.com/MattNavarra/status/684690494841028608',
     date: 'January 6, 2016',

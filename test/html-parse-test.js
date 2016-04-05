@@ -172,8 +172,8 @@ test('parse() tweet - normal', t => {
   const expected = {
     type: 'twitter',
     text: [
-      { content: 'GIF vs. JIF… This ', href: null },
-      { content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6' }
+      {content: 'GIF vs. JIF… This ', href: null},
+      {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
     ],
     url: 'https://twitter.com/MattNavarra/status/684690494841028608',
     date: 'January 6, 2016',
@@ -192,8 +192,8 @@ test('parse() tweet - no date', t => {
   const expected = {
     type: 'twitter',
     text: [
-      { content: 'GIF vs. JIF… This ', href: null },
-      { content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6' }
+      {content: 'GIF vs. JIF… This ', href: null},
+      {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
     ],
     url: 'https://twitter.com/MattNavarra/status/684690494841028608',
     date: '',
@@ -210,7 +210,7 @@ test('parse() tweet - weird input', t => {
   const input = `<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">foo bar<beep>boop</beep></p>&mdash; Matt Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
   const actual = parse(input).text;
   const expected = [
-    { content: 'foo bar', href: null }
+    {content: 'foo bar', href: null}
   ];
   t.same(actual, expected);
 });
