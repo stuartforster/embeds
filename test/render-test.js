@@ -68,7 +68,18 @@ test('render() youtube iframe', t => {
     type: 'youtube',
     youtubeId: 'pDVmldTurqk'
   });
-  const expected = '<iframe src="https://www.youtube.com/embed/pDVmldTurqk"></iframe>';
+  const expected = '<iframe src="https://www.youtube.com/embed/pDVmldTurqk" width="640" height="360" frameborder="0" allowfullscreen="true"></iframe>';
+  t.same(actual, expected);
+});
+
+test('render() youtube iframe custom width & height', t => {
+  const actual = render({
+    type: 'youtube',
+    youtubeId: 'pDVmldTurqk',
+    width: 800,
+    height: 600
+  });
+  const expected = '<iframe src="https://www.youtube.com/embed/pDVmldTurqk" width="800" height="600" frameborder="0" allowfullscreen="true"></iframe>';
   t.same(actual, expected);
 });
 
@@ -185,6 +196,20 @@ test('render() custom', t => {
   t.same(actual, expected);
 });
 
+test('render() custom, allow fullscreen', t => {
+  const input = {
+    type: 'custom',
+    src: 'http://custom.com',
+    width: 600,
+    height: 600,
+    secure: false,
+    allowFullscreen: true
+  };
+  const actual = render(input);
+  const expected = '<iframe src="http://custom.com" width="600" height="600" frameborder="0" allowfullscreen="true"></iframe>';
+  t.same(actual, expected);
+});
+
 test('render() vine', t => {
   const input = {
     id: 'bjHh0zHdgZT',
@@ -193,5 +218,17 @@ test('render() vine', t => {
   };
   const actual = render(input);
   const expected = '<iframe src="https://vine.co/v/bjHh0zHdgZT/embed/simple" width="600" height="600" frameborder="0"></iframe>';
+  t.same(actual, expected);
+});
+
+test('render() vine, custom size', t => {
+  const input = {
+    id: 'bjHh0zHdgZT',
+    type: 'vine',
+    url: 'https://vine.co/v/bjHh0zHdgZT/embed/simple',
+    size: 400
+  };
+  const actual = render(input);
+  const expected = '<iframe src="https://vine.co/v/bjHh0zHdgZT/embed/simple" width="400" height="400" frameborder="0"></iframe>';
   t.same(actual, expected);
 });
