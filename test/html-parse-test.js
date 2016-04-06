@@ -3,6 +3,7 @@ import 'babel-core/register';
 import {parse as _parse} from '../lib';
 import queryDom from 'query-dom';
 import tsml from 'tsml';
+import fixtures from './fixtures';
 
 const parse = str => _parse(queryDom(str));
 
@@ -171,8 +172,8 @@ test('parse() tweet - normal', t => {
   const expected = {
     type: 'twitter',
     text: [
-      { content: 'GIF vs. JIF… This ', href: null },
-      { content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6' }
+      {content: 'GIF vs. JIF… This ', href: null},
+      {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
     ],
     url: 'https://twitter.com/MattNavarra/status/684690494841028608',
     date: 'January 6, 2016',
@@ -191,8 +192,8 @@ test('parse() tweet - no date', t => {
   const expected = {
     type: 'twitter',
     text: [
-      { content: 'GIF vs. JIF… This ', href: null },
-      { content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6' }
+      {content: 'GIF vs. JIF… This ', href: null},
+      {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
     ],
     url: 'https://twitter.com/MattNavarra/status/684690494841028608',
     date: '',
@@ -209,7 +210,7 @@ test('parse() tweet - weird input', t => {
   const input = `<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">foo bar<beep>boop</beep></p>&mdash; Matt Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
   const actual = parse(input).text;
   const expected = [
-    { content: 'foo bar', href: null }
+    {content: 'foo bar', href: null}
   ];
   t.same(actual, expected);
 });
@@ -263,25 +264,41 @@ test('parse() instagram https iframe', t => {
 });
 
 test('parse() instagram - with caption', t => {
-  const input = `<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="6" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:8px;"> <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;"> <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAGFBMVEUiIiI9PT0eHh4gIB4hIBkcHBwcHBwcHBydr+JQAAAACHRSTlMABA4YHyQsM5jtaMwAAADfSURBVDjL7ZVBEgMhCAQBAf//42xcNbpAqakcM0ftUmFAAIBE81IqBJdS3lS6zs3bIpB9WED3YYXFPmHRfT8sgyrCP1x8uEUxLMzNWElFOYCV6mHWWwMzdPEKHlhLw7NWJqkHc4uIZphavDzA2JPzUDsBZziNae2S6owH8xPmX8G7zzgKEOPUoYHvGz1TBCxMkd3kwNVbU0gKHkx+iZILf77IofhrY1nYFnB/lQPb79drWOyJVa/DAvg9B/rLB4cC+Nqgdz/TvBbBnr6GBReqn/nRmDgaQEej7WhonozjF+Y2I/fZou/qAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div></div> <p style=" margin:8px 0 0 0; padding:0 4px;"> <a href="https://www.instagram.com/p/-7PIhyA6J3/" style=" color:#000; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none; word-wrap:break-word;" target="_blank">Reinsta @karinn In Berlin. Feeling awesome.</a></p> <p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;">A photo posted by David Björklund (@david_bjorklund) on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2015-12-05T21:40:53+00:00">Dec 5, 2015 at 1:40pm PST</time></p></div></blockquote><script async defer src="//platform.instagram.com/en_US/embeds.js"></script>`;
+  const input = fixtures.instagramCaption;
   const actual = parse(input);
   const expected = {
     type: 'instagram',
     id: '-7PIhyA6J3',
     url: 'https://www.instagram.com/p/-7PIhyA6J3/',
-    text: 'Reinsta @karinn In Berlin. Feeling awesome.'
+    text: 'Reinsta @karinn In Berlin. Feeling awesome.',
+    user: {
+      name: 'David Björklund',
+      slug: 'david_bjorklund'
+    },
+    date: {
+      utc: '2015-12-05T21:40:53+00:00',
+      string: 'Dec 5, 2015 at 1:40pm PST'
+    }
   };
   t.same(actual, expected);
 });
 
 test('parse() instagram - without caption', t => {
-  const input = `<blockquote class="instagram-media" data-instgrm-version="6" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"><div style="padding:8px;"> <div style=" background:#F8F8F8; line-height:0; margin-top:40px; padding:50.0% 0; text-align:center; width:100%;"> <div style=" background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAsCAMAAAApWqozAAAAGFBMVEUiIiI9PT0eHh4gIB4hIBkcHBwcHBwcHBydr+JQAAAACHRSTlMABA4YHyQsM5jtaMwAAADfSURBVDjL7ZVBEgMhCAQBAf//42xcNbpAqakcM0ftUmFAAIBE81IqBJdS3lS6zs3bIpB9WED3YYXFPmHRfT8sgyrCP1x8uEUxLMzNWElFOYCV6mHWWwMzdPEKHlhLw7NWJqkHc4uIZphavDzA2JPzUDsBZziNae2S6owH8xPmX8G7zzgKEOPUoYHvGz1TBCxMkd3kwNVbU0gKHkx+iZILf77IofhrY1nYFnB/lQPb79drWOyJVa/DAvg9B/rLB4cC+Nqgdz/TvBbBnr6GBReqn/nRmDgaQEej7WhonozjF+Y2I/fZou/qAAAAAElFTkSuQmCC); display:block; height:44px; margin:0 auto -44px; position:relative; top:-22px; width:44px;"></div></div><p style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; line-height:17px; margin-bottom:0; margin-top:8px; overflow:hidden; padding:8px 0 7px; text-align:center; text-overflow:ellipsis; white-space:nowrap;"><a href="https://www.instagram.com/p/-7PIhyA6J3/" style=" color:#c9c8cd; font-family:Arial,sans-serif; font-size:14px; font-style:normal; font-weight:normal; line-height:17px; text-decoration:none;" target="_blank">A photo posted by David Björklund (@david_bjorklund)</a> on <time style=" font-family:Arial,sans-serif; font-size:14px; line-height:17px;" datetime="2015-12-05T21:40:53+00:00">Dec 5, 2015 at 1:40pm PST</time></p></div></blockquote><script async defer src="//platform.instagram.com/en_US/embeds.js"></script>`;
+  const input = fixtures.instagramWithoutCaption;
   const actual = parse(input);
   const expected = {
     type: 'instagram',
     id: '-7PIhyA6J3',
     url: 'https://www.instagram.com/p/-7PIhyA6J3/',
-    text: null
+    text: null,
+    user: {
+      name: 'David Björklund',
+      slug: 'david_bjorklund'
+    },
+    date: {
+      utc: '2015-12-05T21:40:53+00:00',
+      string: 'Dec 5, 2015 at 1:40pm PST'
+    }
   };
   t.same(actual, expected);
 });
@@ -294,33 +311,81 @@ test('parse() instagram - bad input', t => {
 });
 
 test('parse() facebook - post', t => {
-  const input = tsml`
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];  if (d.getElementById(id)) return;  js = d.createElement(s); js.id = id;  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";  fjs.parentNode.insertBefore(js, fjs);}(document, \'script\', \'facebook-jssdk\'));</script>
-    <div class="fb-post" data-href="https://www.facebook.com/david.bjorklund/posts/10153809692501070" data-width="500">
-      <div class="fb-xfbml-parse-ignore">
-        <blockquote cite="https://www.facebook.com/david.bjorklund/posts/10153809692501070">
-          <p>Hey!So, for the last few weeks I&#039;ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)</p>
-          Posted by <a href="#" role="button">David Pop Hipsterson</a> on&nbsp;<a href="https://www.facebook.com/david.bjorklund/posts/10153809692501070">Thursday, January 21, 2016</a>
-        </blockquote>
-      </div>
-    </div>`;
+  const input = fixtures.facebookPost;
   const actual = parse(input);
   const expected = {
     url: 'https://www.facebook.com/david.bjorklund/posts/10153809692501070',
     type: 'facebook',
-    embedAs: 'post'
+    embedAs: 'post',
+    date: 'Thursday, January 21, 2016',
+    user: 'David Pop Hipsterson',
+    text: [{
+      content: 'Hey!So, for the last few weeks I\'ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)',
+      href: null
+    }]
+  };
+  t.same(actual, expected);
+});
+
+test('parse() facebook - post with embed code', t => {
+  const input = `${fixtures.facebookEmbedCode}${fixtures.facebookPost}`;
+  const actual = parse(input);
+  const expected = {
+    url: 'https://www.facebook.com/david.bjorklund/posts/10153809692501070',
+    type: 'facebook',
+    embedAs: 'post',
+    date: 'Thursday, January 21, 2016',
+    user: 'David Pop Hipsterson',
+    text: [{
+      content: 'Hey!So, for the last few weeks I\'ve worked on http://mic.com/ - the new home for mic.com (on desktop) - please take a look :)',
+      href: null
+    }]
   };
   t.same(actual, expected);
 });
 
 test('parse() facebook - video', t => {
-  const input = '<div id="fb-root"></div><script>(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];  if (d.getElementById(id)) return;  js = d.createElement(s); js.id = id;  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";  fjs.parentNode.insertBefore(js, fjs);}(document, \'script\', \'facebook-jssdk\'));</script><div class="fb-video" data-allowfullscreen="1" data-href="https://www.facebook.com/MicMedia/videos/1060315987324524/"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/MicMedia/videos/1060315987324524/"><a href="https://www.facebook.com/MicMedia/videos/1060315987324524/">Why is breastfeeding in public such a big deal?</a><p>Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they&#039;re breastfeeding?</p>Posted by <a href="https://www.facebook.com/MicMedia/">Mic</a> on Friday, January 15, 2016</blockquote></div></div>';
+  const input = fixtures.facebookVideo;
   const actual = parse(input);
   const expected = {
     url: 'https://www.facebook.com/MicMedia/videos/1060315987324524/',
     type: 'facebook',
-    embedAs: 'video'
+    embedAs: 'video',
+    headline: 'Why is breastfeeding in public such a big deal?',
+    date: 'Friday, January 15, 2016',
+    user: {
+      url: 'https://www.facebook.com/MicMedia/',
+      name: 'Mic'
+    },
+    text: [
+      {
+        content: 'Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they\'re breastfeeding?',
+        href: null
+      }
+    ]
+  };
+  t.same(actual, expected);
+});
+
+test('parse() facebook - video with embed code', t => {
+  const input = `${fixtures.facebookEmbedCode}${fixtures.facebookVideo}`;
+  const actual = parse(input);
+  const expected = {
+    url: 'https://www.facebook.com/MicMedia/videos/1060315987324524/',
+    type: 'facebook',
+    embedAs: 'video',
+    headline: 'Why is breastfeeding in public such a big deal?',
+    date: 'Friday, January 15, 2016',
+    user: {
+      url: 'https://www.facebook.com/MicMedia/',
+      name: 'Mic'
+    },
+    text: [
+      {
+        content: 'Men and women *both* have nipples — so why do we only shame women for showing theirs... especially when they\'re breastfeeding?',
+        href: null
+      }
+    ]
   };
   t.same(actual, expected);
 });

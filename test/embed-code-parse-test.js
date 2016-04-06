@@ -1,6 +1,6 @@
 import test from 'ava';
 import 'babel-core/register';
-import { parseInput } from '../lib';
+import {parseInput} from '../lib';
 import tsml from 'tsml';
 
 test('parse invalid input', t => {
