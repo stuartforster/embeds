@@ -68,7 +68,7 @@ test('render() youtube iframe', t => {
     type: 'youtube',
     youtubeId: 'pDVmldTurqk'
   });
-  const expected = '<iframe src="https://www.youtube.com/embed/pDVmldTurqk" width="640" height="480" frameborder="0" allowfullscreen="true"></iframe>';
+  const expected = '<iframe src="https://www.youtube.com/embed/pDVmldTurqk" width="640" height="360" frameborder="0" allowfullscreen="true"></iframe>';
   t.same(actual, expected);
 });
 
