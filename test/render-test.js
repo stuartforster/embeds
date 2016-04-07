@@ -4,6 +4,7 @@ import {render as _render} from '../lib';
 import tsml from 'tsml';
 import {string} from 'deku';
 import fixtures from './fixtures';
+import renderText from '../lib/render-text';
 
 const render = opts => string.render(_render(opts));
 
@@ -231,4 +232,10 @@ test('render() vine, custom size', t => {
   const actual = render(input);
   const expected = '<iframe src="https://vine.co/v/bjHh0zHdgZT/embed/simple" width="400" height="400" frameborder="0"></iframe>';
   t.is(actual, expected);
+});
+
+test('renderText()', t => {
+  t.deepEqual(renderText(undefined), []);
+  t.deepEqual(renderText(null), []);
+  t.deepEqual(renderText([]), []);
 });
