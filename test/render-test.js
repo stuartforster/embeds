@@ -16,7 +16,7 @@ test('render() img', t => {
     alt: undefined
   });
   const expected = '<img src="http://example.com/image.jpg"></img>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() img, with alt-attribute', t => {
@@ -28,7 +28,7 @@ test('render() img, with alt-attribute', t => {
     alt: 'beep boop'
   });
   const expected = '<img src="http://example.com/image.jpg" alt="beep boop"></img>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() img with width & height', t => {
@@ -40,7 +40,7 @@ test('render() img with width & height', t => {
     alt: undefined
   });
   const expected = '<img src="http://example.com/image.jpg" width="100" height="200"></img>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() video  ', t => {
@@ -60,7 +60,7 @@ test('render() video  ', t => {
     <source src="http://example.com/video.mp4"></source>
     <source src="http://example.com/video2.mp4" type="video/mp4"></source>
   </video>`;
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() youtube iframe', t => {
@@ -69,7 +69,7 @@ test('render() youtube iframe', t => {
     youtubeId: 'pDVmldTurqk'
   });
   const expected = '<iframe src="https://www.youtube.com/embed/pDVmldTurqk" width="640" height="360" frameborder="0" allowfullscreen="true"></iframe>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() youtube iframe custom width & height', t => {
@@ -80,7 +80,7 @@ test('render() youtube iframe custom width & height', t => {
     height: 600
   });
   const expected = '<iframe src="https://www.youtube.com/embed/pDVmldTurqk" width="800" height="600" frameborder="0" allowfullscreen="true"></iframe>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() tweet - normal', t => {
@@ -102,7 +102,7 @@ test('render() tweet - normal', t => {
   const expected = tsml`<blockquote class="twitter-tweet" lang="en">
     <p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a>
   </blockquote>`;
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() instagram - with caption', t => {
@@ -122,7 +122,7 @@ test('render() instagram - with caption', t => {
   };
   const actual = render(input);
   const expected = fixtures.instagramCaption;
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() instagram - without caption', t => {
@@ -142,7 +142,7 @@ test('render() instagram - without caption', t => {
   };
   const actual = render(input);
   const expected = fixtures.instagramWithoutCaption;
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() facebook - post', t => {
@@ -159,7 +159,7 @@ test('render() facebook - post', t => {
   };
   const actual = render(input);
   const expected = fixtures.facebookPost;
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() facebook - video', t => {
@@ -180,7 +180,7 @@ test('render() facebook - video', t => {
   };
   const actual = render(input);
   const expected = fixtures.facebookVideo;
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() custom', t => {
@@ -193,7 +193,7 @@ test('render() custom', t => {
   };
   const actual = render(input);
   const expected = '<iframe src="http://custom.com" width="600" height="600" frameborder="0"></iframe>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() custom, allow fullscreen', t => {
@@ -207,7 +207,7 @@ test('render() custom, allow fullscreen', t => {
   };
   const actual = render(input);
   const expected = '<iframe src="http://custom.com" width="600" height="600" frameborder="0" allowfullscreen="true"></iframe>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() vine', t => {
@@ -218,7 +218,7 @@ test('render() vine', t => {
   };
   const actual = render(input);
   const expected = '<iframe src="https://vine.co/v/bjHh0zHdgZT/embed/simple" width="600" height="600" frameborder="0"></iframe>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('render() vine, custom size', t => {
@@ -230,5 +230,5 @@ test('render() vine, custom size', t => {
   };
   const actual = render(input);
   const expected = '<iframe src="https://vine.co/v/bjHh0zHdgZT/embed/simple" width="400" height="400" frameborder="0"></iframe>';
-  t.same(actual, expected);
+  t.is(actual, expected);
 });

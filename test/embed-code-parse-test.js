@@ -4,10 +4,10 @@ import {parseInput} from '../lib';
 import tsml from 'tsml';
 
 test('parse invalid input', t => {
-  t.same(parseInput(), null);
-  t.same(parseInput(null), null);
-  t.same(parseInput(''), null);
-  t.same(parseInput('https://unknown.com/embed/ABCde'), null);
+  t.is(parseInput(), null);
+  t.is(parseInput(null), null);
+  t.is(parseInput(''), null);
+  t.is(parseInput('https://unknown.com/embed/ABCde'), null);
 });
 
 test('parse instagram', t => {
@@ -18,19 +18,22 @@ test('parse instagram', t => {
     id: 'tsxp1hhQTG'
   };
 
-  t.same(parseInput('https://www.instagram.com/p/tsxp1hhQTG'), expected);
-  t.same(parseInput('http://www.instagram.com/p/tsxp1hhQTG'), expected);
-  t.same(parseInput('//www.instagram.com/p/tsxp1hhQTG'), expected);
-  t.same(parseInput('https://instagram.com/p/tsxp1hhQTG'), expected);
-  t.same(parseInput('http://instagram.com/p/tsxp1hhQTG'), expected);
-  t.same(parseInput('//instagram.com/p/tsxp1hhQTG'), expected);
-  t.same(parseInput('https://instagram.com/p/tsxp1hhQTG/'), expected);
-  t.same(parseInput('http://instagram.com/p/tsxp1hhQTG/'), expected);
-  t.same(parseInput('//instagram.com/p/tsxp1hhQTG/'), expected);
-  t.same(parseInput('https://instagram.com/p/tsxp1hhQTG/embed'), expected);
-  t.same(parseInput('http://instagram.com/p/tsxp1hhQTG/embed'), expected);
-  t.same(parseInput('//instagram.com/p/tsxp1hhQTG/embed'), expected);
-  t.same(parseInput('<iframe src="//instagram.com/p/tsxp1hhQTG"></iframe>'), expected);
+  t.deepEqual(parseInput('https://www.instagram.com/p/tsxp1hhQTG'), expected);
+  t.deepEqual(parseInput('http://www.instagram.com/p/tsxp1hhQTG'), expected);
+  t.deepEqual(parseInput('//www.instagram.com/p/tsxp1hhQTG'), expected);
+  t.deepEqual(parseInput('https://instagram.com/p/tsxp1hhQTG'), expected);
+  t.deepEqual(parseInput('http://instagram.com/p/tsxp1hhQTG'), expected);
+  t.deepEqual(parseInput('//instagram.com/p/tsxp1hhQTG'), expected);
+  t.deepEqual(parseInput('https://instagram.com/p/tsxp1hhQTG/'), expected);
+  t.deepEqual(parseInput('http://instagram.com/p/tsxp1hhQTG/'), expected);
+  t.deepEqual(parseInput('//instagram.com/p/tsxp1hhQTG/'), expected);
+  t.deepEqual(parseInput('https://instagram.com/p/tsxp1hhQTG/embed'), expected);
+  t.deepEqual(parseInput('http://instagram.com/p/tsxp1hhQTG/embed'), expected);
+  t.deepEqual(parseInput('//instagram.com/p/tsxp1hhQTG/embed'), expected);
+  t.deepEqual(
+    parseInput('<iframe src="//instagram.com/p/tsxp1hhQTG"></iframe>'),
+    expected
+  );
 });
 
 test('giphy', t => {
@@ -49,10 +52,10 @@ test('giphy', t => {
       </a>
     </p>`;
 
-  t.same(parseInput('https://giphy.com/embed/3oxRmeLK7bjcq0CCCA'), expected);
-  t.same(parseInput('http://giphy.com/embed/3oxRmeLK7bjcq0CCCA'), expected);
-  t.same(parseInput('//giphy.com/embed/3oxRmeLK7bjcq0CCCA'), expected);
-  t.same(parseInput(code), expected);
+  t.deepEqual(parseInput('https://giphy.com/embed/3oxRmeLK7bjcq0CCCA'), expected);
+  t.deepEqual(parseInput('http://giphy.com/embed/3oxRmeLK7bjcq0CCCA'), expected);
+  t.deepEqual(parseInput('//giphy.com/embed/3oxRmeLK7bjcq0CCCA'), expected);
+  t.deepEqual(parseInput(code), expected);
 });
 
 test('facebook', t => {
@@ -118,21 +121,54 @@ test('facebook', t => {
     id: '10102593740125791'
   };
 
-  t.same(parseInput(videoCode), expectedVideo);
-  t.same(parseInput('https://www.facebook.com/MicMedia/videos/1095905927098863'), expectedVideo);
-  t.same(parseInput('http://www.facebook.com/MicMedia/videos/1095905927098863'), expectedVideo);
-  t.same(parseInput('//www.facebook.com/MicMedia/videos/1095905927098863'), expectedVideo);
-  t.same(parseInput('https://facebook.com/MicMedia/videos/1095905927098863'), expectedVideo);
-  t.same(parseInput('http://facebook.com/MicMedia/videos/1095905927098863'), expectedVideo);
-  t.same(parseInput('//facebook.com/MicMedia/videos/1095905927098863'), expectedVideo);
+  t.deepEqual(parseInput(videoCode), expectedVideo);
+  t.deepEqual(
+    parseInput('https://www.facebook.com/MicMedia/videos/1095905927098863'),
+    expectedVideo
+  );
+  t.deepEqual(
+    parseInput('http://www.facebook.com/MicMedia/videos/1095905927098863'),
+    expectedVideo
+  );
+  t.deepEqual(
+    parseInput('//www.facebook.com/MicMedia/videos/1095905927098863'),
+    expectedVideo
+  );
+  t.deepEqual(
+    parseInput('https://facebook.com/MicMedia/videos/1095905927098863'),
+    expectedVideo
+  );
+  t.deepEqual(
+    parseInput('http://facebook.com/MicMedia/videos/1095905927098863'),
+    expectedVideo
+  );
+  t.deepEqual(
+    parseInput('//facebook.com/MicMedia/videos/1095905927098863'),
+    expectedVideo
+  );
 
-  t.same(parseInput(postCode), expectedPost);
-  t.same(parseInput('https://www.facebook.com/zuck/posts/10102593740125791'), expectedPost);
-  t.same(parseInput('http://www.facebook.com/zuck/posts/10102593740125791'), expectedPost);
-  t.same(parseInput('//www.facebook.com/zuck/posts/10102593740125791'), expectedPost);
-  t.same(parseInput('https://facebook.com/zuck/posts/10102593740125791'), expectedPost);
-  t.same(parseInput('http://facebook.com/zuck/posts/10102593740125791'), expectedPost);
-  t.same(parseInput('//facebook.com/zuck/posts/10102593740125791'), expectedPost);
+  t.deepEqual(parseInput(postCode), expectedPost);
+  t.deepEqual(
+    parseInput('https://www.facebook.com/zuck/posts/10102593740125791'),
+    expectedPost
+  );
+  t.deepEqual(
+    parseInput('http://www.facebook.com/zuck/posts/10102593740125791'),
+    expectedPost
+  );
+  t.deepEqual(
+    parseInput('//www.facebook.com/zuck/posts/10102593740125791'),
+    expectedPost
+  );
+  t.deepEqual(
+    parseInput('https://facebook.com/zuck/posts/10102593740125791'),
+    expectedPost
+  );
+  t.deepEqual(
+    parseInput('http://facebook.com/zuck/posts/10102593740125791'),
+    expectedPost
+  );
+  t.deepEqual(parseInput('//facebook.com/zuck/posts/10102593740125791'), expectedPost);
 });
 
 test('youtube', t => {
@@ -148,22 +184,22 @@ test('youtube', t => {
     url: 'https://www.youtube.com/embed/I7IdS-PbEgI'
   };
 
-  t.same(parseInput(youtubeCode), expected);
-  t.same(parseInput('https://www.youtube.com/embed/I7IdS-PbEgI'), expected);
-  t.same(parseInput('http://www.youtube.com/embed/I7IdS-PbEgI'), expected);
-  t.same(parseInput('//www.youtube.com/embed/I7IdS-PbEgI'), expected);
-  t.same(parseInput('https://youtube.com/embed/I7IdS-PbEgI'), expected);
-  t.same(parseInput('http://youtube.com/embed/I7IdS-PbEgI'), expected);
-  t.same(parseInput('//youtube.com/embed/I7IdS-PbEgI'), expected);
-  t.same(parseInput('https://www.youtube.com/watch?v=I7IdS-PbEgI'), expected);
-  t.same(parseInput('http://www.youtube.com/watch?v=I7IdS-PbEgI'), expected);
-  t.same(parseInput('//www.youtube.com/watch?v=I7IdS-PbEgI'), expected);
-  t.same(parseInput('https://youtube.com/watch?v=I7IdS-PbEgI'), expected);
-  t.same(parseInput('http://youtube.com/watch?v=I7IdS-PbEgI'), expected);
-  t.same(parseInput('//youtube.com/watch?v=I7IdS-PbEgI'), expected);
-  t.same(parseInput('https://youtu.be/I7IdS-PbEgI'), expected);
-  t.same(parseInput('http://youtu.be/I7IdS-PbEgI'), expected);
-  t.same(parseInput('//youtu.be/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput(youtubeCode), expected);
+  t.deepEqual(parseInput('https://www.youtube.com/embed/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('http://www.youtube.com/embed/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('//www.youtube.com/embed/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('https://youtube.com/embed/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('http://youtube.com/embed/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('//youtube.com/embed/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('https://www.youtube.com/watch?v=I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('http://www.youtube.com/watch?v=I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('//www.youtube.com/watch?v=I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('https://youtube.com/watch?v=I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('http://youtube.com/watch?v=I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('//youtube.com/watch?v=I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('https://youtu.be/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('http://youtu.be/I7IdS-PbEgI'), expected);
+  t.deepEqual(parseInput('//youtu.be/I7IdS-PbEgI'), expected);
 });
 
 test('twitter', t => {
@@ -189,13 +225,31 @@ test('twitter', t => {
     id: '709353211455541248'
   };
 
-  t.same(parseInput(twitterCode), expected);
-  t.same(parseInput('https://twitter.com/thomas_kast/status/709353211455541248'), expected);
-  t.same(parseInput('http://twitter.com/thomas_kast/status/709353211455541248'), expected);
-  t.same(parseInput('//twitter.com/thomas_kast/status/709353211455541248'), expected);
-  t.same(parseInput('https://www.twitter.com/thomas_kast/status/709353211455541248'), expected);
-  t.same(parseInput('http://www.twitter.com/thomas_kast/status/709353211455541248'), expected);
-  t.same(parseInput('//www.twitter.com/thomas_kast/status/709353211455541248'), expected);
+  t.deepEqual(parseInput(twitterCode), expected);
+  t.deepEqual(
+    parseInput('https://twitter.com/thomas_kast/status/709353211455541248'),
+    expected
+  );
+  t.deepEqual(
+    parseInput('http://twitter.com/thomas_kast/status/709353211455541248'),
+    expected
+  );
+  t.deepEqual(
+    parseInput('//twitter.com/thomas_kast/status/709353211455541248'),
+    expected
+  );
+  t.deepEqual(
+    parseInput('https://www.twitter.com/thomas_kast/status/709353211455541248'),
+    expected
+  );
+  t.deepEqual(
+    parseInput('http://www.twitter.com/thomas_kast/status/709353211455541248'),
+    expected
+  );
+  t.deepEqual(
+    parseInput('//www.twitter.com/thomas_kast/status/709353211455541248'),
+    expected
+  );
 });
 
 test('tumblr', t => {
@@ -215,10 +269,19 @@ test('tumblr', t => {
     id: '105825530041'
   };
 
-  t.same(parseInput(tumblrCode), expected);
-  t.same(parseInput('https://embed.tumblr.com/embed/post/Hj-X2tKsXur2oF91XMwT5w/105825530041'), expected);
-  t.same(parseInput('http://embed.tumblr.com/embed/post/Hj-X2tKsXur2oF91XMwT5w/105825530041'), expected);
-  t.same(parseInput('//embed.tumblr.com/embed/post/Hj-X2tKsXur2oF91XMwT5w/105825530041'), expected);
+  t.deepEqual(parseInput(tumblrCode), expected);
+  t.deepEqual(
+    parseInput('https://embed.tumblr.com/embed/post/Hj-X2tKsXur2oF91XMwT5w/105825530041'),
+    expected
+  );
+  t.deepEqual(
+    parseInput('http://embed.tumblr.com/embed/post/Hj-X2tKsXur2oF91XMwT5w/105825530041'),
+    expected
+  );
+  t.deepEqual(
+    parseInput('//embed.tumblr.com/embed/post/Hj-X2tKsXur2oF91XMwT5w/105825530041'),
+    expected
+  );
 });
 
 test('vine', t => {
@@ -236,16 +299,16 @@ test('vine', t => {
     id: 'iHTTDHz6Z2v'
   };
 
-  t.same(parseInput(vineCode), expected);
-  t.same(parseInput('https://vine.co/v/iHTTDHz6Z2v'), expected);
-  t.same(parseInput('https://vine.co/v/iHTTDHz6Z2v/embed'), expected);
-  t.same(parseInput('https://vine.co/v/iHTTDHz6Z2v/embed/simple'), expected);
-  t.same(parseInput('http://vine.co/v/iHTTDHz6Z2v'), expected);
-  t.same(parseInput('http://vine.co/v/iHTTDHz6Z2v/embed'), expected);
-  t.same(parseInput('http://vine.co/v/iHTTDHz6Z2v/embed/simple'), expected);
-  t.same(parseInput('//vine.co/v/iHTTDHz6Z2v'), expected);
-  t.same(parseInput('//vine.co/v/iHTTDHz6Z2v/embed'), expected);
-  t.same(parseInput('//vine.co/v/iHTTDHz6Z2v/embed/simple'), expected);
+  t.deepEqual(parseInput(vineCode), expected);
+  t.deepEqual(parseInput('https://vine.co/v/iHTTDHz6Z2v'), expected);
+  t.deepEqual(parseInput('https://vine.co/v/iHTTDHz6Z2v/embed'), expected);
+  t.deepEqual(parseInput('https://vine.co/v/iHTTDHz6Z2v/embed/simple'), expected);
+  t.deepEqual(parseInput('http://vine.co/v/iHTTDHz6Z2v'), expected);
+  t.deepEqual(parseInput('http://vine.co/v/iHTTDHz6Z2v/embed'), expected);
+  t.deepEqual(parseInput('http://vine.co/v/iHTTDHz6Z2v/embed/simple'), expected);
+  t.deepEqual(parseInput('//vine.co/v/iHTTDHz6Z2v'), expected);
+  t.deepEqual(parseInput('//vine.co/v/iHTTDHz6Z2v/embed'), expected);
+  t.deepEqual(parseInput('//vine.co/v/iHTTDHz6Z2v/embed/simple'), expected);
 });
 
 test('imgur', t => {
@@ -261,16 +324,16 @@ test('imgur', t => {
     id: '2GuAESk'
   };
 
-  t.same(parseInput(imgurCode), expected);
-  t.same(parseInput('https://imgur.com/gallery/2GuAESk'), expected);
-  t.same(parseInput('http://imgur.com/gallery/2GuAESk'), expected);
-  t.same(parseInput('//imgur.com/gallery/2GuAESk'), expected);
-  t.same(parseInput('https://imgur.com/2GuAESk'), expected);
-  t.same(parseInput('http://imgur.com/2GuAESk'), expected);
-  t.same(parseInput('//imgur.com/2GuAESk'), expected);
-  t.same(parseInput('https://imgur.com/2GuAESk/embed'), expected);
-  t.same(parseInput('http://imgur.com/2GuAESk/embed'), expected);
-  t.same(parseInput('//imgur.com/2GuAESk/embed'), expected);
+  t.deepEqual(parseInput(imgurCode), expected);
+  t.deepEqual(parseInput('https://imgur.com/gallery/2GuAESk'), expected);
+  t.deepEqual(parseInput('http://imgur.com/gallery/2GuAESk'), expected);
+  t.deepEqual(parseInput('//imgur.com/gallery/2GuAESk'), expected);
+  t.deepEqual(parseInput('https://imgur.com/2GuAESk'), expected);
+  t.deepEqual(parseInput('http://imgur.com/2GuAESk'), expected);
+  t.deepEqual(parseInput('//imgur.com/2GuAESk'), expected);
+  t.deepEqual(parseInput('https://imgur.com/2GuAESk/embed'), expected);
+  t.deepEqual(parseInput('http://imgur.com/2GuAESk/embed'), expected);
+  t.deepEqual(parseInput('//imgur.com/2GuAESk/embed'), expected);
 });
 
 test('vimeo', t => {
@@ -290,13 +353,13 @@ test('vimeo', t => {
     id: '35630244'
   };
 
-  t.same(parseInput(vimeoCode), expected);
-  t.same(parseInput('https://player.vimeo.com/video/35630244'), expected);
-  t.same(parseInput('http://player.vimeo.com/video/35630244'), expected);
-  t.same(parseInput('//player.vimeo.com/video/35630244'), expected);
-  t.same(parseInput('https://vimeo.com/35630244'), expected);
-  t.same(parseInput('http://vimeo.com/35630244'), expected);
-  t.same(parseInput('//vimeo.com/35630244'), expected);
+  t.deepEqual(parseInput(vimeoCode), expected);
+  t.deepEqual(parseInput('https://player.vimeo.com/video/35630244'), expected);
+  t.deepEqual(parseInput('http://player.vimeo.com/video/35630244'), expected);
+  t.deepEqual(parseInput('//player.vimeo.com/video/35630244'), expected);
+  t.deepEqual(parseInput('https://vimeo.com/35630244'), expected);
+  t.deepEqual(parseInput('http://vimeo.com/35630244'), expected);
+  t.deepEqual(parseInput('//vimeo.com/35630244'), expected);
 });
 
 test('graphiq', t => {
@@ -306,13 +369,13 @@ test('graphiq', t => {
     id: '2iub6zz6ltH'
   };
 
-  t.same(parseInput('https://graphiq.com/wlp/2iub6zz6ltH'), expected);
-  t.same(parseInput('http://graphiq.com/wlp/2iub6zz6ltH'), expected);
-  t.same(parseInput('//graphiq.com/wlp/2iub6zz6ltH'), expected);
-  t.same(parseInput('https://www.graphiq.com/wlp/2iub6zz6ltH'), expected);
-  t.same(parseInput('http://www.graphiq.com/wlp/2iub6zz6ltH'), expected);
-  t.same(parseInput('//www.graphiq.com/wlp/2iub6zz6ltH'), expected);
-  t.same(parseInput('https://w.graphiq.com/w/2iub6zz6ltH'), expected);
-  t.same(parseInput('http://w.graphiq.com/w/2iub6zz6ltH'), expected);
-  t.same(parseInput('//w.graphiq.com/w/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('https://graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('http://graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('//graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('https://www.graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('http://www.graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('//www.graphiq.com/wlp/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('https://w.graphiq.com/w/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('http://w.graphiq.com/w/2iub6zz6ltH'), expected);
+  t.deepEqual(parseInput('//w.graphiq.com/w/2iub6zz6ltH'), expected);
 });
