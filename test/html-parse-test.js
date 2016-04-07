@@ -10,7 +10,7 @@ const parse = str => _parse(queryDom(str));
 test('parse() empty', t => {
   const actual = parse('');
   const expected = null;
-  t.same(actual, expected);
+  t.is(actual, expected);
 });
 
 test('parse() img', t => {
@@ -22,7 +22,7 @@ test('parse() img', t => {
     height: undefined,
     alt: undefined
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() single element', t => {
@@ -35,7 +35,7 @@ test('parse() single element', t => {
     height: undefined,
     alt: undefined
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() img, with alt-attribute', t => {
@@ -47,7 +47,7 @@ test('parse() img, with alt-attribute', t => {
     height: undefined,
     alt: 'beep boop'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() img with width & height', t => {
@@ -61,7 +61,7 @@ test('parse() img with width & height', t => {
     alt: undefined
   };
 
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() img with width & height css', t => {
@@ -75,7 +75,7 @@ test('parse() img with width & height css', t => {
     alt: undefined
   };
 
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() video with src', t => {
@@ -90,7 +90,7 @@ test('parse() video with src', t => {
     width: undefined,
     height: undefined
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() video with sources', t => {
@@ -111,7 +111,7 @@ test('parse() video with sources', t => {
     width: undefined,
     height: undefined
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() video with width & height', t => {
@@ -126,7 +126,7 @@ test('parse() video with width & height', t => {
     width: 100,
     height: 200
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() video with width & height css', t => {
@@ -141,7 +141,7 @@ test('parse() video with width & height css', t => {
     width: 100,
     height: 200
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() youtube iframe', t => {
@@ -151,7 +151,7 @@ test('parse() youtube iframe', t => {
     type: 'youtube',
     youtubeId: 'pDVmldTurqk'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() youtube embedly iframe', t => {
@@ -163,7 +163,7 @@ test('parse() youtube embedly iframe', t => {
     type: 'youtube',
     youtubeId: '3rS6mZUo3fg'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() tweet - normal', t => {
@@ -183,7 +183,7 @@ test('parse() tweet - normal', t => {
     },
     id: '684690494841028608'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() tweet - no date', t => {
@@ -203,7 +203,7 @@ test('parse() tweet - no date', t => {
     },
     id: '684690494841028608'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() tweet - weird input', t => {
@@ -212,7 +212,7 @@ test('parse() tweet - weird input', t => {
   const expected = [
     {content: 'foo bar', href: null}
   ];
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() tweet - no paragraph, no user', t => {
@@ -229,14 +229,14 @@ test('parse() tweet - no paragraph, no user', t => {
     },
     id: '684690494841028608'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() tweet - no id', t => {
   const input = `<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) </blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
   const actual = parse(input);
   const expected = null;
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() instagram http iframe', t => {
@@ -248,7 +248,7 @@ test('parse() instagram http iframe', t => {
     id: 'fdx1CSuEPV',
     url: 'https://instagram.com/p/fdx1CSuEPV'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() instagram https iframe', t => {
@@ -260,7 +260,7 @@ test('parse() instagram https iframe', t => {
     id: 'fdx1CSuEPV',
     url: 'https://instagram.com/p/fdx1CSuEPV'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() instagram - with caption', t => {
@@ -280,7 +280,7 @@ test('parse() instagram - with caption', t => {
       string: 'Dec 5, 2015 at 1:40pm PST'
     }
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() instagram - without caption', t => {
@@ -300,14 +300,14 @@ test('parse() instagram - without caption', t => {
       string: 'Dec 5, 2015 at 1:40pm PST'
     }
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() instagram - bad input', t => {
   const input = `<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-version="6" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:658px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);"></blockquote>`;
   const actual = parse(input);
   const expected = null;
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() facebook - post', t => {
@@ -324,7 +324,7 @@ test('parse() facebook - post', t => {
       href: null
     }]
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() facebook - post with embed code', t => {
@@ -341,7 +341,7 @@ test('parse() facebook - post with embed code', t => {
       href: null
     }]
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() facebook - video', t => {
@@ -364,7 +364,7 @@ test('parse() facebook - video', t => {
       }
     ]
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() facebook - video with embed code', t => {
@@ -387,7 +387,7 @@ test('parse() facebook - video with embed code', t => {
       }
     ]
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() vine', t => {
@@ -398,7 +398,7 @@ test('parse() vine', t => {
     type: 'vine',
     url: 'https://vine.co/v/bjHh0zHdgZT/embed/simple'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() vine embedly', t => {
@@ -409,14 +409,14 @@ test('parse() vine embedly', t => {
     type: 'vine',
     url: 'https://vine.co/v/bjHh0zHdgZT/embed/simple'
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() iframe no src', t => {
   const input = '<iframe class="embedly-embed" width="600" height="600" scrolling="no" frameborder="0" allowfullscreen=""></iframe>';
   const actual = parse(input);
   const expected = null;
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() custom embed', t => {
@@ -429,7 +429,7 @@ test('parse() custom embed', t => {
     height: 600,
     secure: false
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() custom secure embed', t => {
@@ -442,7 +442,7 @@ test('parse() custom secure embed', t => {
     height: 600,
     secure: true
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
 
 test('parse() custom secure embed with no protocol', t => {
@@ -455,5 +455,5 @@ test('parse() custom secure embed with no protocol', t => {
     height: 600,
     secure: true
   };
-  t.same(actual, expected);
+  t.deepEqual(actual, expected);
 });
