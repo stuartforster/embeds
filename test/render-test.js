@@ -106,6 +106,63 @@ test('render() tweet - normal', t => {
   t.is(actual, expected);
 });
 
+test('render() tweet with no user slug', t => {
+  const input = {
+    type: 'twitter',
+    text: [
+      {content: 'GIF vs. JIF… This ', href: null},
+      {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
+    ],
+    url: 'https://twitter.com/MattNavarra/status/684690494841028608',
+    date: 'January 6, 2016',
+    user: {
+      slug: null,
+      name: 'Matt (foo) Navarra'
+    },
+    id: '684690494841028608'
+  };
+  const actual = render(input);
+  const expected = fixtures.tweetNoUser;
+  t.is(actual, expected);
+});
+
+test('render() tweet with no user name', t => {
+  const input = {
+    type: 'twitter',
+    text: [
+      {content: 'GIF vs. JIF… This ', href: null},
+      {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
+    ],
+    url: 'https://twitter.com/MattNavarra/status/684690494841028608',
+    date: 'January 6, 2016',
+    user: {
+      slug: 'MattNavarra',
+      name: null
+    },
+    id: '684690494841028608'
+  };
+  const actual = render(input);
+  const expected = fixtures.tweetNoUser;
+  t.is(actual, expected);
+});
+
+test('render() tweet with no user', t => {
+  const input = {
+    type: 'twitter',
+    text: [
+      {content: 'GIF vs. JIF… This ', href: null},
+      {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
+    ],
+    url: 'https://twitter.com/MattNavarra/status/684690494841028608',
+    date: 'January 6, 2016',
+    user: null,
+    id: '684690494841028608'
+  };
+  const actual = render(input);
+  const expected = fixtures.tweetNoUser;
+  t.is(actual, expected);
+});
+
 test('render() instagram - with caption', t => {
   const input = {
     type: 'instagram',
