@@ -263,6 +263,18 @@ test('parse() instagram https iframe', t => {
   t.deepEqual(actual, expected);
 });
 
+test('parse() instagram www iframe', t => {
+  const input = `<iframe src="http://www.instagram.com/p/fdx1CSuEPV/embed"></iframe>`;
+  const actual = parse(input);
+  const expected = {
+    type: 'instagram',
+    text: '',
+    id: 'fdx1CSuEPV',
+    url: 'https://instagram.com/p/fdx1CSuEPV'
+  };
+  t.deepEqual(actual, expected);
+});
+
 test('parse() instagram - with caption', t => {
   const input = fixtures.instagramCaption;
   const actual = parse(input);
