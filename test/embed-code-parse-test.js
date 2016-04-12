@@ -379,3 +379,26 @@ test('graphiq', t => {
   t.deepEqual(parseInput('http://w.graphiq.com/w/2iub6zz6ltH'), expected);
   t.deepEqual(parseInput('//w.graphiq.com/w/2iub6zz6ltH'), expected);
 });
+
+test('facebook allow periods in username', t => {
+  const expected = {
+    type: 'facebook',
+    embedAs: 'video',
+    user: 'rick.morty',
+    url: 'https://www.facebook.com/rick.morty/videos/1337',
+    id: '1337'
+  };
+  const actual = parseInput('https://www.facebook.com/rick.morty/videos/1337');
+  t.deepEqual(expected, actual);
+});
+
+test('twitter allow periods in username', t => {
+  const expected = {
+    type: 'twitter',
+    url: 'https://twitter.com/rick.morty/status/42',
+    user: 'rick.morty',
+    id: '42'
+  };
+  const actual = parseInput('https://twitter.com/rick.morty/status/42');
+  t.deepEqual(expected, actual);
+});
