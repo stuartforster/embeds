@@ -2,11 +2,11 @@ import test from 'ava';
 import 'babel-core/register';
 import fixtures from './fixtures';
 import {render, parse} from '../lib';
-import {string} from 'deku';
+import {renderString, tree} from 'deku';
 import queryDom from 'query-dom';
 
 const parseAndRender = input =>
-  string.render(render(parse(queryDom(input))));
+  renderString(tree(render(parse(queryDom(input)))));
 
 test('parse() + render() facebook - post', t => {
   const input = fixtures.facebookPost;
