@@ -1,5 +1,4 @@
-import test from 'ava';
-import 'babel-core/register';
+import test from './tape-wrapper';import 'babel-core/register';
 import {parse as _parse} from '../lib';
 import queryDom from 'query-dom';
 import tsml from 'tsml';

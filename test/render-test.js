@@ -1,4 +1,4 @@
-import test from 'ava';
+import test from './tape-wrapper';
 import 'babel-core/register';
 import {render as _render} from '../lib';
 import tsml from 'tsml';
