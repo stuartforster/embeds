@@ -1,12 +1,20 @@
 import test from './tape-wrapper';
-import 'babel-core/register';
+
 import fixtures from './fixtures';
-import {render, parse} from '../lib';
+import {render, parse as _parse} from '../lib';
 import {renderString, tree} from 'deku';
-import queryDom from 'query-dom';
+import queryDom from 'query-dom'
+
+const parse = process.browser
+  ? (str) => {
+    const node = document.createElement('div');
+    node.innerHTML = str;
+    return _parse(node.childNodes);
+  }
+  : str => _parse(queryDom(str));
 
 const parseAndRender = input =>
-  renderString(tree(render(parse(queryDom(input)))));
+  renderString(tree(render(parse(input))));
 
 test('parse() + render() facebook - post', t => {
   const input = fixtures.facebookPost;
