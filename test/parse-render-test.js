@@ -43,3 +43,10 @@ test('parse() + render() instagram - without caption', t => {
   const actual = parseAndRender(input);
   t.is(actual, expected);
 });
+
+test('parse() + render() instagram - from iframe', t => {
+  const input = '<iframe src="http://instagram.com/p/fdx1CSuEPV/embed"></iframe>';
+  const expected = fixtures.instagramFromIframe;
+  const actual = parseAndRender(input);
+  t.is(actual, expected);
+});

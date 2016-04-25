@@ -4,6 +4,7 @@ export default {
   instagramCaption: fs.readFileSync(`${__dirname}/instagram.html`, 'utf8').trim(),
   instagramWithoutCaption:
     fs.readFileSync(`${__dirname}/instagram-no-caption.html`, 'utf8').trim(),
+  instagramFromIframe: fs.readFileSync(`${__dirname}/instagram-from-iframe.html`, 'utf8').trim(),
   facebookPost: fs.readFileSync(`${__dirname}/facebook-post.html`, 'utf8').trim(),
   facebookVideo: fs.readFileSync(`${__dirname}/facebook-video.html`, 'utf8').trim(),
   facebookEmbedCode: fs.readFileSync(`${__dirname}/facebook-embed-code.html`, 'utf8').trim(),
