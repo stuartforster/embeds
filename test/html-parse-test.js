@@ -1,11 +1,16 @@
-import test from 'ava';
-import 'babel-core/register';
+import test from './tape-wrapper';
 import {parse as _parse} from '../lib';
 import queryDom from 'query-dom';
 import tsml from 'tsml';
 import fixtures from './fixtures';
 
-const parse = str => _parse(queryDom(str));
+const parse = process.browser
+  ? (str) => {
+    const node = document.createElement('div');
+    node.innerHTML = str;
+    return _parse(node.childNodes);
+  }
+  : str => _parse(queryDom(str));
 
 test('parse() empty', t => {
   const actual = parse('');

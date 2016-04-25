@@ -1,5 +1,4 @@
-import test from 'ava';
-import 'babel-core/register';
+import test from './tape-wrapper';
 import {parseInput} from '../lib';
 import tsml from 'tsml';
 
