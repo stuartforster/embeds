@@ -8,5 +8,6 @@ export default {
   facebookPost: fs.readFileSync(`${__dirname}/facebook-post.html`, 'utf8').trim(),
   facebookVideo: fs.readFileSync(`${__dirname}/facebook-video.html`, 'utf8').trim(),
   facebookEmbedCode: fs.readFileSync(`${__dirname}/facebook-embed-code.html`, 'utf8').trim(),
-  tweetNoUser: fs.readFileSync(`${__dirname}/tweet-no-user.html`, 'utf8').trim()
+  tweetNoUser: fs.readFileSync(`${__dirname}/tweet-no-user.html`, 'utf8').trim(),
+  tweetFromIframe: fs.readFileSync(`${__dirname}/tweet-from-iframe.html`, 'utf8').trim()
 };

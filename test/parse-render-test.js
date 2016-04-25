@@ -50,3 +50,10 @@ test('parse() + render() instagram - from iframe', t => {
   const actual = parseAndRender(input);
   t.is(actual, expected);
 });
+
+test('parse() + render() twitter - iframe', t => {
+  const input = '<iframe class="twitter-tweet" data-tweet-id="699645794903666688"></iframe>';
+  const expected = fixtures.tweetFromIframe;
+  const actual = parseAndRender(input);
+  t.is(actual, expected);
+});
