@@ -401,3 +401,20 @@ test('twitter allow periods in username', t => {
   const actual = parseInput('https://twitter.com/rick.morty/status/42');
   t.deepEqual(expected, actual);
 });
+
+test('acast', t => {
+  const acastCode = tsml`
+    <iframe width="540" height="540"
+    src="https://embed.acast.com/specialrelationship/-1-terrorismandnationalsecurity"
+    scrolling="no" frameborder="0" style="border:none;overflow:hidden;"></iframe>`;
+
+  const expected = {
+    type: 'acast',
+    channel: 'specialrelationship',
+    url: 'https://embed.acast.com/specialrelationship/-1-terrorismandnationalsecurity',
+    name: '-1-terrorismandnationalsecurity'
+  };
+
+  t.deepEqual(parseInput(acastCode), expected);
+  t.deepEqual(parseInput('https://embed.acast.com/specialrelationship/-1-terrorismandnationalsecurity'), expected);
+});
