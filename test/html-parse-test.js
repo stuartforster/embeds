@@ -429,6 +429,39 @@ test('parse() vine embedly', t => {
   t.deepEqual(actual, expected);
 });
 
+test('parse() spotify', t => {
+  const input = '<iframe src="https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>';
+  const actual = parse(input);
+  const expected = {
+    type: 'spotify',
+    url: 'https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf',
+    spotifyUri: 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf',
+    width: 300,
+    height: 380
+  };
+  t.deepEqual(actual, expected);
+});
+
+test('parse() spotify no size', t => {
+  const input = '<iframe src="https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf"></iframe>';
+  const actual = parse(input);
+  const expected = {
+    type: 'spotify',
+    url: 'https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf',
+    spotifyUri: 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf',
+    width: 300,
+    height: 80
+  };
+  t.deepEqual(actual, expected);
+});
+
+test('parse() spotify no uri', t => {
+  const input = '<iframe src="https://embed.spotify.com/abc"></iframe>';
+  const actual = parse(input);
+  const expected = null;
+  t.deepEqual(actual, expected);
+});
+
 test('parse() iframe no src', t => {
   const input = '<iframe class="embedly-embed" width="600" height="600" scrolling="no" frameborder="0" allowfullscreen=""></iframe>';
   const actual = parse(input);

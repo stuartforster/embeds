@@ -290,6 +290,30 @@ test('render() vine, custom size', t => {
   t.is(actual, expected);
 });
 
+test('render() spotify, custom size', t => {
+  const input = {
+    spotifyUri: 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf',
+    type: 'spotify',
+    url: 'https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf',
+    width: 400,
+    height: 300
+  };
+  const actual = render(input);
+  const expected = '<iframe src="https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="100%" height="300" frameborder="0"></iframe>';
+  t.is(actual, expected);
+});
+
+test('render() spotify, default size', t => {
+  const input = {
+    spotifyUri: 'spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf',
+    type: 'spotify',
+    url: 'https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf'
+  };
+  const actual = render(input);
+  const expected = '<iframe src="https://embed.spotify.com/?uri=spotify:user:spotify:playlist:3rgsDhGHZxZ9sB9DQWQfuf" width="100%" height="80" frameborder="0"></iframe>';
+  t.is(actual, expected);
+});
+
 test('renderText()', t => {
   t.deepEqual(renderText(undefined), []);
   t.deepEqual(renderText(null), []);
