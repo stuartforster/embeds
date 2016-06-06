@@ -104,6 +104,19 @@ test('facebook', t => {
       </div>
     </div>`;
 
+  const photoCode = tsml`
+    <div class="fb-post" data-href="https://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738/?type=3" data-width="500" data-show-text="true">
+      <div class="fb-xfbml-parse-ignore">
+        <blockquote cite="https://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738/?type=3">
+          <p>via Tumblr user kristine-claire.</p>
+          Posted by <a href="https://www.facebook.com/rewire.news/">Rewire</a> on&nbsp;
+          <a href="https://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738/?type=3">
+            Tuesday, June 17, 2014
+          </a>
+        </blockquote>
+      </div>
+    </div>`;
+
   const expectedVideo = {
     type: 'facebook',
     embedAs: 'video',
@@ -168,6 +181,34 @@ test('facebook', t => {
     expectedPost
   );
   t.deepEqual(parseInput('//facebook.com/zuck/posts/10102593740125791'), expectedPost);
+
+  const expectedPhoto = {
+    type: 'facebook',
+    embedAs: 'photo',
+    user: 'rewire.news',
+    url: 'https://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738',
+    id: '10152515593211738'
+  };
+
+  t.deepEqual(parseInput(photoCode), expectedPhoto);
+  t.deepEqual(
+    parseInput('https://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738'),
+    expectedPhoto);
+  t.deepEqual(
+    parseInput('http://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738'),
+    expectedPhoto);
+  t.deepEqual(
+    parseInput('//www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738'),
+    expectedPhoto);
+  t.deepEqual(
+    parseInput('https://facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738'),
+    expectedPhoto);
+  t.deepEqual(
+    parseInput('http://facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738'),
+    expectedPhoto);
+  t.deepEqual(
+    parseInput('//facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738'),
+    expectedPhoto);
 });
 
 test('youtube', t => {
