@@ -361,6 +361,40 @@ test('parse() facebook - post with embed code', t => {
   t.deepEqual(actual, expected);
 });
 
+test('parse() facebook - photo', t => {
+  const input = fixtures.facebookPhoto;
+  const actual = parse(input);
+  const expected = {
+    embedAs: 'photo',
+    type: 'facebook',
+    url: 'https://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738',
+    text: [{
+      content: 'via Tumblr user kristine-claire.',
+      href: null
+    }],
+    date: 'Tuesday, June 17, 2014',
+    user: 'Rewire'
+  };
+  t.deepEqual(actual, expected);
+});
+
+test('parse() facebook - photo with embed code', t => {
+  const input = `${fixtures.facebookEmbedCode}${fixtures.facebookPhoto}`;
+  const actual = parse(input);
+  const expected = {
+    embedAs: 'photo',
+    type: 'facebook',
+    url: 'https://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738',
+    text: [{
+      content: 'via Tumblr user kristine-claire.',
+      href: null
+    }],
+    date: 'Tuesday, June 17, 2014',
+    user: 'Rewire'
+  };
+  t.deepEqual(actual, expected);
+});
+
 test('parse() facebook - video', t => {
   const input = fixtures.facebookVideo;
   const actual = parse(input);
