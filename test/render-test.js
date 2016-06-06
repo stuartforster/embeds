@@ -240,6 +240,23 @@ test('render() facebook - video', t => {
   t.is(actual, expected);
 });
 
+test('reder() facebook - photo', t => {
+  const input = {
+    url: 'https://www.facebook.com/rewire.news/photos/a.102749171737.90216.9432926737/10152515593211738',
+    type: 'facebook',
+    embedAs: 'photo',
+    user: 'Rewire',
+    date: 'Tuesday, June 17, 2014',
+    text: [{
+      content: 'via Tumblr user kristine-claire.',
+      href: null
+    }]
+  };
+  const actual = render(input);
+  const expected = fixtures.facebookPhoto;
+  t.is(actual, expected);
+});
+
 test('render() custom', t => {
   const input = {
     type: 'custom',
