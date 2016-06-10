@@ -6,6 +6,7 @@ export default {
     fs.readFileSync(`${__dirname}/instagram-no-caption.html`, 'utf8').trim(),
   facebookPost: fs.readFileSync(`${__dirname}/facebook-post.html`, 'utf8').trim(),
   facebookVideo: fs.readFileSync(`${__dirname}/facebook-video.html`, 'utf8').trim(),
+  facebookPhoto: fs.readFileSync(`${__dirname}/facebook-photo.html`, 'utf8').trim(),
   facebookEmbedCode: fs.readFileSync(`${__dirname}/facebook-embed-code.html`, 'utf8').trim(),
   tweetNoUser: fs.readFileSync(`${__dirname}/tweet-no-user.html`, 'utf8').trim()
 };
