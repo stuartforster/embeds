@@ -99,7 +99,7 @@ test('render() tweet - normal', t => {
     id: '684690494841028608'
   };
   const actual = render(input);
-  const expected = tsml`<blockquote class="twitter-tweet" lang="en">
+  const expected = tsml`<blockquote class="twitter-tweet" data-lang="en">
     <p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a>
   </blockquote>`;
   t.is(actual, expected);
