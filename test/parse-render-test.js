@@ -2,7 +2,7 @@ import test from './tape-wrapper';
 
 import fixtures from './fixtures';
 import {render, parse as _parse} from '../lib';
-import {renderString, tree} from 'deku';
+import {string} from 'deku';
 import queryDom from 'query-dom';
 
 const parse = process.browser
@@ -14,7 +14,7 @@ const parse = process.browser
   : str => _parse(queryDom(str));
 
 const parseAndRender = input =>
-  renderString(tree(render(parse(input))));
+  string.render(render(parse(input)));
 
 test('parse() + render() facebook - post', t => {
   const input = fixtures.facebookPost;

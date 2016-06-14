@@ -1,11 +1,11 @@
 import test from './tape-wrapper';
 import {render as _render} from '../lib';
 import tsml from 'tsml';
-import {renderString, tree} from 'deku';
+import {string} from 'deku';
 import fixtures from './fixtures';
 import renderText from '../lib/render-text';
 
-const render = opts => renderString(tree(_render(opts)));
+const render = opts => string.render(_render(opts));
 
 test('render() img', t => {
   const actual = render({
