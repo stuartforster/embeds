@@ -30,6 +30,13 @@ test('parse() + render() facebook - video', t => {
   t.is(actual, expected);
 });
 
+test('parse() + render() twitter - video', t => {
+  const input = fixtures.tweetVideo;
+  const expected = input;
+  const actual = parseAndRender(input);
+  t.is(actual, expected);
+});
+
 test('parse() + render() instagram - with caption', t => {
   const input = fixtures.instagramCaption;
   const expected = input;

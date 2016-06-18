@@ -172,10 +172,11 @@ test('parse() youtube embedly iframe', t => {
 });
 
 test('parse() tweet - normal', t => {
-  const input = `<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
+  const input = `<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
   const actual = parse(input);
   const expected = {
     type: 'twitter',
+    embedAs: 'tweet',
     text: [
       {content: 'GIF vs. JIF… This ', href: null},
       {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
@@ -191,11 +192,39 @@ test('parse() tweet - normal', t => {
   t.deepEqual(actual, expected);
 });
 
-test('parse() tweet - no date', t => {
-  const input = `<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608"></a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
+test('parse() tweet - video', t => {
+  const input = `<blockquote class="twitter-video" data-lang="en"><p lang="en" dir="ltr">Surfer <a href="https://twitter.com/bethanyhamilton">@bethanyhamilton</a>, who lost her arm in a 2003 shark attack, finishes 3rd in <a href="https://twitter.com/wsl">@wsl</a> Fiji. <a href="https://twitter.com/hashtag/VideoOfTheDay?src=hash">#VideoOfTheDay</a> <a href="https://t.co/elSAwTdP6L">pic.twitter.com/elSAwTdP6L</a></p>&mdash; Twitter Video (@video) <a href="https://twitter.com/video/status/737840608895762432">June 1, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
   const actual = parse(input);
   const expected = {
     type: 'twitter',
+    embedAs: 'video',
+    text: [
+      {content: 'Surfer ', href: null},
+      {content: '@bethanyhamilton', href: 'https://twitter.com/bethanyhamilton'},
+      {content: ', who lost her arm in a 2003 shark attack, finishes 3rd in ', href: null},
+      {content: '@wsl', href: 'https://twitter.com/wsl'},
+      {content: ' Fiji. ', href: null},
+      {content: '#VideoOfTheDay', href: 'https://twitter.com/hashtag/VideoOfTheDay?src=hash'},
+      {content: ' ', href: null},
+      {content: 'pic.twitter.com/elSAwTdP6L', href: 'https://t.co/elSAwTdP6L'}
+    ],
+    url: 'https://twitter.com/video/status/737840608895762432',
+    date: 'June 1, 2016',
+    user: {
+      slug: 'video',
+      name: 'Twitter Video'
+    },
+    id: '737840608895762432'
+  };
+  t.deepEqual(actual, expected);
+});
+
+test('parse() tweet - no date', t => {
+  const input = `<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608"></a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
+  const actual = parse(input);
+  const expected = {
+    type: 'twitter',
+    embedAs: 'tweet',
     text: [
       {content: 'GIF vs. JIF… This ', href: null},
       {content: 'pic.twitter.com/qFAHWgdbL6', href: 'https://t.co/qFAHWgdbL6'}
@@ -212,7 +241,7 @@ test('parse() tweet - no date', t => {
 });
 
 test('parse() tweet - weird input', t => {
-  const input = `<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">foo bar<beep>boop</beep></p>&mdash; Matt Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
+  const input = `<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">foo bar<beep>boop</beep></p>&mdash; Matt Navarra (@MattNavarra) <a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
   const actual = parse(input).text;
   const expected = [
     {content: 'foo bar', href: null}
@@ -221,10 +250,11 @@ test('parse() tweet - weird input', t => {
 });
 
 test('parse() tweet - no paragraph, no user', t => {
-  const input = `<blockquote class="twitter-tweet" lang="en"><a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
+  const input = `<blockquote class="twitter-tweet" data-lang="en"><a href="https://twitter.com/MattNavarra/status/684690494841028608">January 6, 2016</a></blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
   const actual = parse(input);
   const expected = {
     type: 'twitter',
+    embedAs: 'tweet',
     text: [],
     url: 'https://twitter.com/MattNavarra/status/684690494841028608',
     date: 'January 6, 2016',
@@ -238,7 +268,7 @@ test('parse() tweet - no paragraph, no user', t => {
 });
 
 test('parse() tweet - no id', t => {
-  const input = `<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) </blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
+  const input = `<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">GIF vs. JIF… This <a href="https://t.co/qFAHWgdbL6">pic.twitter.com/qFAHWgdbL6</a></p>&mdash; Matt (foo) Navarra (@MattNavarra) </blockquote><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>`;
   const actual = parse(input);
   const expected = null;
   t.deepEqual(actual, expected);
