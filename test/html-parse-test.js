@@ -533,6 +533,21 @@ test('parse() iframe no src', t => {
   t.deepEqual(actual, expected);
 });
 
+test('parse() tumblr embed', t => {
+  const input = fixtures.tumblrPost;
+  const actual = parse(input);
+  const expected = {
+    type: 'tumblr',
+    did: '7c08ba46cb75162284770cdee2a59365891a5e18',
+    url: 'https://embed.tumblr.com/embed/post/8_SX4ALNOf1fYyEcjq78YQ/147291233392',
+    text: [{
+      content: 'http://jencita.tumblr.com/post/147291233392/tswiftdaily-taylor-swift-at-lady-cilento',
+      href: 'http://jencita.tumblr.com/post/147291233392/tswiftdaily-taylor-swift-at-lady-cilento'
+    }]
+  };
+  t.deepEqual(actual, expected);
+});
+
 test('parse() custom embed', t => {
   const input = '<iframe src="http://custom.com" width="600" height="600" frameborder="0"></iframe>';
   const actual = parse(input);

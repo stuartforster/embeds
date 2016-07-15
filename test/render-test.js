@@ -331,6 +331,21 @@ test('render() spotify, default size', t => {
   t.is(actual, expected);
 });
 
+test('render() tumblr', t => {
+  const input = {
+    type: 'tumblr',
+    did: '7c08ba46cb75162284770cdee2a59365891a5e18',
+    url: 'https://embed.tumblr.com/embed/post/8_SX4ALNOf1fYyEcjq78YQ/147291233392',
+    text: [{
+      content: 'http://jencita.tumblr.com/post/147291233392/tswiftdaily-taylor-swift-at-lady-cilento',
+      href: 'http://jencita.tumblr.com/post/147291233392/tswiftdaily-taylor-swift-at-lady-cilento'
+    }]
+  };
+  const actual = render(input);
+  const expected = fixtures.tumblrPost;
+  t.is(actual, expected);
+});
+
 test('renderText()', t => {
   t.deepEqual(renderText(undefined), []);
   t.deepEqual(renderText(null), []);

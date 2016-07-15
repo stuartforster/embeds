@@ -50,3 +50,10 @@ test('parse() + render() instagram - without caption', t => {
   const actual = parseAndRender(input);
   t.is(actual, expected);
 });
+
+test('parse() + render() tumblr post', t => {
+  const input = fixtures.tumblrPost;
+  const expected = input;
+  const actual = parseAndRender(input);
+  t.is(actual, expected);
+});
